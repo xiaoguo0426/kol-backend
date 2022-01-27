@@ -1,0 +1,34 @@
+{extend name="../../admin/view/table"}
+
+{block name="content"}
+<div class="layui-tab layui-tab-card">
+    <ul class="layui-tab-title">
+        <li class="layui-this color-green" data-open="">{$title}</li>
+    </ul>
+    <div class="layui-tab-content">
+        <table id="ArticleList" data-url="{:sysuri('article/list')}" data-target-search="form.form-search"></table>
+    </div>
+</div>
+<script>
+    $(function () {
+        $('#ArticleList').layTable({
+            even: true, height: 'full',
+            sort: {field: 'id', type: 'desc'},
+            where: {country: '{$country|default=""}'},
+            cols: [[
+                {checkbox: true, fixed: true},
+                {field: 'id', title: 'ID', align: 'center', width: 100, sort: true},
+                {field: 'title', title: '标题', align: 'left', minWidth: 100, sort: true},
+                {field: 'subtitle', title: '副标题', align: 'left', minWidth: 50, sort: true},
+                {toolbar: '#toolbar', title: '操作面板', align: 'center', minWidth: 160, fixed: 'right'}
+            ]]
+        });
+    });
+</script>
+
+<script type="text/html" id="toolbar">
+    <!--{if auth("translate")}-->
+    <a class="layui-btn layui-btn-sm" data-title="翻译" data-open='{:url("translate")}?id={{d.id}}&country={$country}'>翻 译</a>
+    <!--{/if}-->
+</script>
+{/block}

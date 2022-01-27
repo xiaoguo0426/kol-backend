@@ -1,0 +1,41 @@
+<form class="layui-form layui-card" action="{:sysuri()}" data-auto="true" method="post" autocomplete="off">
+
+    <div class="layui-card-body padding-left-40">
+
+        <label class="layui-form-item relative block">
+            <span class="help-label"><b>标题</b></span>
+            {if isset($vo.title)}
+            <input maxlength="50" class="layui-input think-bg-gray" name="title" value='{$vo.title|default=""}' required placeholder="请输入标题">
+            {else}
+            <input maxlength="50" class="layui-input" name="title" value='{$vo.title|default=""}' required placeholder="请输入标题">
+            {/if}
+        </label>
+
+        <label class="layui-form-item relative block">
+            <span class="help-label"><b>国家(二字码)</b></span>
+            {if isset($vo.title)}
+            <input readonly maxlength="50" class="layui-input think-bg-gray" name="country" value='{$vo.country|default=""}' required placeholder="请输入国家">
+            {else}
+            <input maxlength="50" class="layui-input" name="country" value='{$vo.country|default=""}' required placeholder="请输入标题">
+            {/if}
+        </label>
+
+        <label class="layui-form-item relative block">
+            <span class="help-label"><b>关联表名</b></span>
+            {if isset($vo.table_link)}
+            <input readonly maxlength="50" class="layui-input think-bg-gray" name="table_link" value='{$vo.table_link|default=""}' required placeholder="请输入关联表名">
+            {else}
+            <input maxlength="50" class="layui-input" name="table_link" value='{$vo.table_link|default=""}' required placeholder="请输入关联表名">
+            {/if}
+        </label>
+    </div>
+
+    <div class="hr-line-dashed"></div>
+    {notempty name='vo.id'}<input type='hidden' value='{$vo.id}' name='id'>{/notempty}
+
+    <div class="layui-form-item text-center">
+        <button class="layui-btn" type='submit'>保存数据</button>
+        <button class="layui-btn layui-btn-danger" type='button' data-confirm="确定要取消编辑吗？" data-close>取消编辑</button>
+    </div>
+
+</form>

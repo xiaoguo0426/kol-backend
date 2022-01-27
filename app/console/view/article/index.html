@@ -1,0 +1,44 @@
+{extend name="../../admin/view/table"}
+
+{block name="button"}
+<!--{if auth("add")}-->
+<button data-modal='{:url("add")}' data-title="添加计划" class='layui-btn layui-btn-sm layui-btn-primary'>添加计划</button>
+<!--{/if}-->
+{/block}
+{block name="content"}
+<div class="layui-tab layui-tab-card">
+    <ul class="layui-tab-title">
+        <li class="layui-this color-green" data-open="">{$title}</li>
+    </ul>
+    <div class="layui-tab-content">
+        <table id="ArticlePlan" data-url="{:sysuri('article/index')}" data-target-search="form.form-search"></table>
+    </div>
+</div>
+<script>
+    $(function () {
+        $('#ArticlePlan').layTable({
+            even: true, height: 'full',
+            sort: {field: 'id', type: 'desc'},
+            where: {type: '{$type|default="index"}'},
+            cols: [[
+                {checkbox: true, fixed: true},
+                {field: 'id', title: 'ID', align: 'center', minWidth: 80, sort: true},
+                {field: 'title', title: '标题', align: 'center', minWidth: 80, sort: true},
+                {field: 'table_link', title: '关联表名', align: 'center', minWidth: 170, sort: true},
+                {field: 'create_date', title: '创建时间', align: 'center', minWidth: 170, sort: true},
+                {field: 'create_by', title: '创建人', align: 'center', minWidth: 170, sort: true},
+                {toolbar: '#toolbar', title: '操作面板', align: 'center', minWidth: 160, fixed: 'right'}
+            ]]
+        });
+    });
+</script>
+
+<script type="text/html" id="toolbar">
+    <!--{if auth("edit")}-->
+    <a class="layui-btn layui-btn-sm" data-title="编辑" data-modal='{:url("edit")}?id={{d.id}}'>编 辑</a>
+    <!--{/if}-->
+    <!--{if auth("list")}-->
+    <a class="layui-btn layui-btn-sm layui-bg-red" data-title="文章列表" data-open='{:url("list")}?country={{d.country}}'>文章列表</a>
+    <!--{/if}-->
+</script>
+{/block}

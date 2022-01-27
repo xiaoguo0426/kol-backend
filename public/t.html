@@ -1,0 +1,52 @@
+<div class="layui-card">
+    <div class="layui-card-body">
+        <div class="layui-card-table">
+            <form class="layui-form layui-card" action="" data-auto="true" method="post" autocomplete="off">
+                <div class="layui-card-body padding-left-40">
+                    <label class="layui-form-item relative block">
+                        <span class="help-label"><b>文章标题</b></span>
+                        <input maxlength="100" class="layui-input" name="title"
+                                                                    value='14 Genius Home Office Organization Ideas to Create the Perfect Workspace.md'
+                                                                    required placeholder="">
+                    </label>
+                    <label class="layui-form-item relative block">
+                        <span class="help-label"><b>文章副标题</b></span>
+                        <input maxlength="100" class="layui-input" name="subtitle" value='' required placeholder=""></label>
+                    <div id="test-editormd">
+                        <textarea style="display:none;">### Settings
+
+```javascript
+var testEditor = editormd("test-editormd", {
+    autoHeight : true
+});
+```
+</textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="static/plugs/jquery/jquery.min.js"></script>
+    <script src="static/plugs/editor/editormd.js"></script>
+    <script type="text/javascript">
+        var testEditor;
+
+        $(function () {
+            testEditor = editormd("test-editormd", {
+                width: "90%",
+                autoHeight: true,
+                path: "../lib/",
+                htmlDecode: "style,script,iframe",
+                tex: true,
+                emoji: true,
+                taskList: true,
+                flowChart: true,
+                sequenceDiagram: true
+            });
+
+            $("#append-btn").click(function () {
+
+            });
+        });
+    </script>
+</div>
