@@ -117,14 +117,40 @@ class Article extends Controller
      */
     public function translate()
     {
-        $id = $this->request->get('id', '');
-        $country = $this->request->get('country');
+        if ($this->request->isGet()) {
+            $id = $this->request->get('id', '');
+            $country = $this->request->get('country');
 
-        $table = 'article-' . $country;
-        $article = Db::table($table)->where('id', '=', $id)->find();
+            $table = 'article-' . $country;
+            $article = Db::table($table)->where('id', '=', $id)->find();
 
-        $this->article = $article;
-        $this->fetch();
+            $this->country = $country;
+            $this->article = $article;
+            $this->fetch();
+        } else if ($this->request->isPost()) {
+
+            $id = $this->request->post('id', '');
+            $country = $this->request->post('country', '');
+
+            $title = $this->request->post('title', '');
+            $subtitle = $this->request->post('subtitle', '');
+            $article = $this->request->post('article', '');
+
+            $table = 'article-' . $country;
+
+            $update = Db::table($table)->where('id', '=', $id)->update([
+                'title' => $title,
+                'subtitle' => $subtitle,
+                'content' => $article,
+            ]);
+
+            if ($update) {
+                $this->success('保存成功');
+            } else {
+                $this->error('保存失败');
+            }
+        }
+
     }
 
     /**
