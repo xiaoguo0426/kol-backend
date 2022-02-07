@@ -5,12 +5,14 @@
 
         <label class="layui-form-item relative block">
             <span class="help-label"><b>文章标题</b></span>
-            <input maxlength="100" class="layui-input" name="title" value='{$article.title}' required placeholder="" readonly>
+            <input maxlength="100" class="layui-input" name="title" value='{$article.title}' required placeholder=""
+                   readonly>
             <button type="button" class="layui-btn layui-btn-xs layui-btn-primary" name="translate-title">翻译</button>
         </label>
         <label class="layui-form-item relative block">
             <span class="help-label"><b>文章副标题</b></span>
-            <input maxlength="100" class="layui-input" name="subtitle" value='{$article.subtitle}' placeholder="" readonly>
+            <input maxlength="100" class="layui-input" name="subtitle" value='{$article.subtitle}' placeholder=""
+                   readonly>
             <button type="button" class="layui-btn layui-btn-xs layui-btn-primary" name="translate-subtitle">翻译</button>
         </label>
         <label class="layui-form-item relative block">
@@ -120,7 +122,7 @@
                 //loading
                 let index = $.msg.loading();
                 //发送请求
-                $.get('{:sysuri("t")}?text=' + text, function (res) {
+                $.get('{:sysuri("t")}?text=' + text + '&to={$country}', function (res) {
                     if (res.code === 0) {
                         $.msg.error(res.msg);
                         return true;
@@ -141,7 +143,7 @@
                 //loading
                 let index = $.msg.loading();
                 //发送请求
-                $.get('{:sysuri("t")}?text=' + text, function (res) {
+                $.get('{:sysuri("t")}?text=' + text + '&to={$country}', function (res) {
                     if (res.code === 0) {
                         $.msg.error(res.msg);
                         return true;
@@ -161,7 +163,7 @@
                 //loading
                 let index = $.msg.loading();
                 //发送请求
-                $.get('{:sysuri("t")}?text=' + text, function (res) {
+                $.get('{:sysuri("t")}?text=' + text + '&to={$country}', function (res) {
                     if (res.code === 0) {
                         $.msg.error(res.msg);
                         return true;

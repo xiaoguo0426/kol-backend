@@ -19,15 +19,13 @@
             <input maxlength="50" class="layui-input" name="country" value='{$vo.country|default=""}' required placeholder="请输入标题">
             {/if}
         </label>
-
+        {if isset($vo.table_link)}
         <label class="layui-form-item relative block">
             <span class="help-label"><b>关联表名</b></span>
-            {if isset($vo.table_link)}
             <input readonly maxlength="50" class="layui-input think-bg-gray" name="table_link" value='{$vo.table_link|default=""}' required placeholder="请输入关联表名">
-            {else}
-            <input maxlength="50" class="layui-input" name="table_link" value='{$vo.table_link|default=""}' required placeholder="请输入关联表名">
-            {/if}
         </label>
+        {/if}
+
     </div>
 
     <div class="hr-line-dashed"></div>

@@ -40,15 +40,29 @@ class Article extends Controller
         if ($this->request->isGet()) {
             ArticlePlan::mForm('form');
         } else {
+
+            $country = $this->request->post('country', '');
+
             $update = [
                 'create_by' => AdminService::instance()->getUserId(),
                 'create_date' => date('Y-m-d H:i:s'),
                 'title' => $this->request->post('title', ''),
-                'country' => $this->request->post('country', ''),
-                'table_link' => $this->request->post('table_link', ''),
+                'country' => $country,
+                'table_link' => 'article-' . $country,
             ];
+            //检查表是否已存在
+            $table = 'article-' . $country;
+            $exist = Db::query("select * from information_schema.tables where table_name ='$table';");
+            if ($exist) {
+                $this->error('添加失败，已存在相同的数据表！');
+            } else {
+                //拷贝表
+                $base = 'article';
+                Db::query("CREATE TABLE `$table` LIKE `$base`;");
+                Db::query("INSERT INTO `$table` SELECT * FROM `$base`;");
+            }
+
             if (ArticlePlan::mk()->insert($update) !== false) {
-                //TODO 拷贝表
                 $this->success('添加成功！');
             } else {
                 $this->error('添加失败，请稍候再试！');
