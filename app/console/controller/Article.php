@@ -55,15 +55,16 @@ class Article extends Controller
             $exist = Db::query("select * from information_schema.tables where table_name ='$table';");
             if ($exist) {
                 $this->error('添加失败，已存在相同的数据表！');
-            } else {
-                //拷贝表
-                $base = 'article';
-                Db::query("CREATE TABLE `$table` LIKE `$base`;");
-                Db::query("INSERT INTO `$table` SELECT * FROM `$base`;");
             }
+//            } else {
+//                //拷贝表
+//                $base = 'article';
+//                Db::query("CREATE TABLE `$table` LIKE `$base`;");
+//                Db::query("INSERT INTO `$table` SELECT * FROM `$base`;");
+//            }
 
             if (ArticlePlan::mk()->insert($update) !== false) {
-                $this->success('添加成功！');
+                $this->success('添加成功！请联系技术创建相关数据表');
             } else {
                 $this->error('添加失败，请稍候再试！');
             }
